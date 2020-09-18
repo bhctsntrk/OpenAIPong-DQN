@@ -33,7 +33,9 @@ You can use this implementation for a different environment. But there are some 
 You can also turn off greyscaling process from preprocess function. But you have to modify CNN network because input image channels will change.
 
 ## :orange_book: Using in Colab
-Just open a new colab(GPU) environment. To save your models connect your drive to colab and copy the pong code into a one cell. Lastly change the save path and point it to your drive like ```MODEL_SAVE_PATH = "/content/drive/My Drive/pong-models/pong-cnn-"``` and run.
+There is two way to do this:
+* Just click the Open In Colab badge above.
+* Open a new colab(GPU) environment. To save your models connect your drive to colab and copy the pong code into a one cell. Lastly change the save path and point it to your drive like ```MODEL_SAVE_PATH = "/content/drive/My Drive/pong-models/pong-cnn-"``` and run.
 
 ## :spiral_notepad: References
 [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
