@@ -39,12 +39,12 @@ EPSILON_DECAY = 0.99  # Epsilon decay rate by step
 RENDER_GAME_WINDOW = True  # Opens a new window to render the game (Won't work on colab default)
 
 
-class CNN(nn.Module):
+class DuelCNN(nn.Module):
     """
-    CNN net for image inputs
+    CNN with Duel Algo. https://arxiv.org/abs/1511.06581
     """
     def __init__(self, h, w, output_size):
-        super(CNN, self).__init__()
+        super(DuelCNN, self).__init__()
         self.conv1 = nn.Conv2d(in_channels=4,  out_channels=32, kernel_size=8, stride=4)
         self.bn1 = nn.BatchNorm2d(32)
         convw, convh = self.conv2d_size_calc(w, h, kernel_size=8, stride=4)
@@ -57,9 +57,15 @@ class CNN(nn.Module):
 
         linear_input_size = convw * convh * 64  # Last conv layer's out sizes
 
-        self.linear1 = nn.Linear(in_features=linear_input_size, out_features=512)
-        self.lrelu = nn.LeakyReLU()  # Linear 1 activation funct
-        self.linear2 = nn.Linear(in_features=512, out_features=output_size)
+        # Action layer
+        self.Alinear1 = nn.Linear(in_features=linear_input_size, out_features=128)
+        self.Alrelu = nn.LeakyReLU()  # Linear 1 activation funct
+        self.Alinear2 = nn.Linear(in_features=128, out_features=output_size)
+
+        # State Value layer
+        self.Vlinear1 = nn.Linear(in_features=linear_input_size, out_features=128)
+        self.Vlrelu = nn.LeakyReLU()  # Linear 1 activation funct
+        self.Vlinear2 = nn.Linear(in_features=128, out_features=1)  # Only 1 node
 
     def conv2d_size_calc(self, w, h, kernel_size=5, stride=2):
         """
@@ -76,10 +82,15 @@ class CNN(nn.Module):
 
         x = x.view(x.size(0), -1)  # Flatten every batch
 
-        x = self.lrelu(self.linear1(x))
-        x = self.linear2(x)  # No activation on last layer
+        Ax = self.Alrelu(self.Alinear1(x))
+        Ax = self.Alinear2(Ax)  # No activation on last layer
 
-        return x
+        Vx = self.Vlrelu(self.Vlinear1(x))
+        Vx = self.Vlinear2(Vx)  # No activation on last layer
+
+        q = Vx + (Ax - Ax.mean())
+
+        return q
 
 
 class Agent:
@@ -115,8 +126,8 @@ class Agent:
         self.memory = deque(maxlen=MAX_MEMORY_LEN)
 
         # Create two model for DDQN algorithm
-        self.online_model = CNN(h=self.target_h, w=self.target_w, output_size=self.action_size).to(DEVICE)
-        self.target_model = CNN(h=self.target_h, w=self.target_w, output_size=self.action_size).to(DEVICE)
+        self.online_model = DuelCNN(h=self.target_h, w=self.target_w, output_size=self.action_size).to(DEVICE)
+        self.target_model = DuelCNN(h=self.target_h, w=self.target_w, output_size=self.action_size).to(DEVICE)
         self.target_model.load_state_dict(self.online_model.state_dict())
         self.target_model.eval()
 
