@@ -32,3 +32,6 @@ You can also turn off greyscaling process from preprocess function. But you have
 
 ## :orange_book: Using in Colab
 Just open a new colab(GPU) environment. To save your models connect your drive to colab and copy the pong code into a one cell. Lastly change the save path and point it to your drive like ```MODEL_SAVE_PATH = "/content/drive/My Drive/pong-models/pong-cnn-"``` and run.
+
+## :spiral_notepad: References
+[Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
