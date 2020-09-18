@@ -19,7 +19,7 @@ These graphs show the training results for 900 episodes.
 First create a Python3 environment. Then install these libraries with pip:
 
 * torch
-* gym[atari
+* gym[atari]
 * opencv-python
 
 then check parameters at the very beginning of the code. You will find their descriptions as comment lines.
