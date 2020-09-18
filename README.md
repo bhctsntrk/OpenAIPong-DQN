@@ -3,6 +3,8 @@
 ![Python 3](https://img.shields.io/badge/Python-3-yellow.svg)
 ![Pytorch](https://img.shields.io/badge/Pytorch-1.5-orange.svg)
 ![GYM](https://img.shields.io/badge/GYM-0.17-turquoise.svg)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bhctsntrk/OpenAIPong-DQN/blob/master/OpenAIPong_DQN.ipynb)
+
 
 ![animated](movie.gif)
 
