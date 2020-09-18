@@ -10,7 +10,10 @@
 Implementing Duel Double DQN algorithm with Pytorch to solve OpenAI GYM Atari Pong environment. This implementation learns to play just in 900 episodes. It can take some hours to train from zero. I add 900th episode if you want to test. For testing make it ```SAVE_MODELS = False ``` and ```LOAD_MODEL_FROM_FILE = True``` and ```LOAD_FILE_EPISODE = 900``` and ```MODEL_PATH = "./models/pong-cnn-"```.
 
 ## :chart_with_upwards_trend: Results
+These graphs shows the training results for 900 episodes that takes some hours.
 
+<img src="reward.png" height ="49%" width="49%"></img>
+<img src="avgQ.png" height ="49%" width="49%"></img> 
 
 ## ⚙ Usage
 To run this code youu have to change model save and terminal output save path. You will find parameters at the very beginning of the code.
