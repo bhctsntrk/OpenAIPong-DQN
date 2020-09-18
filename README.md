@@ -4,7 +4,7 @@
 ![Pytorch](https://img.shields.io/badge/Pytorch-1.5-orange.svg)
 ![GYM](https://img.shields.io/badge/GYM-0.17-turquoise.svg)
 
-![animated](video.gif)
+![animated](movie.gif)
 
 ## :scroll: About
 Implementing the Duel Double DQN algorithm with Pytorch to solve the OpenAI GYM Atari Pong environment. This implementation learns to play just in 900 episodes. It takes ~7 hours to train from zero in Google Colab. I add the 900th episode if you want to test. For testing make it ```SAVE_MODELS = False ``` and ```LOAD_MODEL_FROM_FILE = True``` and ```LOAD_FILE_EPISODE = 900``` and ```MODEL_PATH = "./models/pong-cnn-"```.
